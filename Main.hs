@@ -54,5 +54,8 @@ testMultNat = TestCase $ assertEqual "Nats should multiply correctly" (S (S (S (
 testShowNat :: Test
 testShowNat = TestCase $ assertEqual "Nat should convert to string correctly" "5" (show (S (S (S (S (S Z))))))
 
+testOrderOfOperations :: Test
+testOrderOfOperations = TestCase $ assertEqual "Nats should add and multiply in the correct direction" (S (S (S (S (S (S (S (S Z)))))))) ((2 :: Nat) * (3 :: Nat) + (2 :: Nat))
+
 main :: IO Counts
-main = runTestTT $ TestList [testAddNat, testMultNat, testShowNat]
+main = runTestTT $ TestList [testAddNat, testMultNat, testShowNat, testOrderOfOperations]
