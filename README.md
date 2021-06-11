@@ -6,4 +6,5 @@
 
 ```shell
 ghc Main.hs -package HUnit
+./main
 ```
