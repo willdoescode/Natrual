@@ -38,6 +38,12 @@ instance Num Nat where
   (+) n Z = n
   (+) a (S k) = S $ a + k
 
+  -- (S (S Z)) + (S (S Z))
+  -- (S (a + k))
+  -- (S (S (a + Z)))
+  -- (S (S (a)))
+  -- (S (S (S (S Z)))) == 4
+
   (*) Z n = Z
   (*) n (S k) = k * n + n
 
