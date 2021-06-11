@@ -37,7 +37,7 @@ instance Num Nat where
   (+) a (S k) = S $ a + k
 
   (*) Z n = Z
-  (*) n (S k) = (k * n) + n
+  (*) n (S k) = k * n + n
 
   abs _ = Z
   signum _ = Z
