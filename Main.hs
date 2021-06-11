@@ -46,16 +46,36 @@ instance Num Nat where
   (-) _ _ = Z
 
 testAddNat :: Test
-testAddNat = TestCase $ assertEqual "Nats should add correctly" (S (S (S (S (S (S (S (S (S Z))))))))) ((4 :: Nat) + (5 :: Nat))
+testAddNat =
+  TestCase $
+    assertEqual
+      "Nats should add correctly"
+      (S (S (S (S (S (S (S (S (S Z)))))))))
+      ((4 :: Nat) + (5 :: Nat))
 
 testMultNat :: Test
-testMultNat = TestCase $ assertEqual "Nats should multiply correctly" (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S Z)))))))))))))))))))) ((4 :: Nat) * (5 :: Nat))
+testMultNat =
+  TestCase $
+    assertEqual
+      "Nats should multiply correctly"
+      (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S Z))))))))))))))))))))
+      ((4 :: Nat) * (5 :: Nat))
 
 testShowNat :: Test
-testShowNat = TestCase $ assertEqual "Nat should convert to string correctly" "5" (show (S (S (S (S (S Z))))))
+testShowNat =
+  TestCase $
+    assertEqual
+      "Nat should convert to string correctly"
+      "5"
+      (show (S (S (S (S (S Z))))))
 
 testOrderOfOperations :: Test
-testOrderOfOperations = TestCase $ assertEqual "Nats should add and multiply in the correct direction" (S (S (S (S (S (S (S (S Z)))))))) ((2 :: Nat) * (3 :: Nat) + (2 :: Nat))
+testOrderOfOperations =
+  TestCase $
+    assertEqual
+      "Nats should add and multiply in the correct direction"
+      (S (S (S (S (S (S (S (S Z))))))))
+      ((2 :: Nat) * (3 :: Nat) + (2 :: Nat))
 
 main :: IO Counts
 main = runTestTT $ TestList [testAddNat, testMultNat, testShowNat, testOrderOfOperations]
