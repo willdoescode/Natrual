@@ -1,4 +1,6 @@
-data Nat = Z | S Nat
+import Test.HUnit
+
+data Nat = Z | S Nat deriving (Eq)
 
 instance Show Nat where
   show = show . natToInt
@@ -19,19 +21,19 @@ e (S k) = o k
     o Z = False
     o (S k) = e k
 
-instance Enum Nat
+-- instance Enum Nat
 
-instance Eq Nat
+-- instance Eq Nat
 
-instance Ord Nat
+-- instance Ord Nat
 
-instance Real Nat
+-- instance Real Nat
 
-instance Integral Nat
+-- instance Integral Nat
 
 instance Num Nat where
   fromInteger 0 = Z
-  fromInteger x = S (fromInteger (x - 1))
+  fromInteger n = S $ fromInteger $ n - 1
 
   (+) n Z = n
   (+) a (S k) = S $ a + k
@@ -43,5 +45,14 @@ instance Num Nat where
   signum _ = Z
   (-) _ _ = Z
 
-main :: IO ()
-main = print $ (5 :: Nat) * (5 :: Nat)
+testAddNat :: Test
+testAddNat = TestCase $ assertEqual "Nats should add correctly" (S (S (S (S (S (S (S (S (S Z))))))))) ((4 :: Nat) + (5 :: Nat))
+
+testMultNat :: Test
+testMultNat = TestCase $ assertEqual "Nats should multiply correctly" (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S Z)))))))))))))))))))) ((4 :: Nat) * (5 :: Nat))
+
+testShowNat :: Test
+testShowNat = TestCase $ assertEqual "Nat should convert to string correctly" "5" (show (S (S (S (S (S Z))))))
+
+main :: IO Counts
+main = runTestTT $ TestList [testAddNat, testMultNat, testShowNat]
